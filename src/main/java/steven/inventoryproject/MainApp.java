@@ -3,6 +3,7 @@ package steven.inventoryproject;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -10,9 +11,10 @@ import java.io.IOException;
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        Pane myPane = (Pane)FXMLLoader.load(getClass().getResource
+                ("fxml_mainview.fxml"));
+        Scene scene = new Scene(myPane);
+        stage.setTitle("Inventory Management System");
         stage.setScene(scene);
         stage.show();
     }

@@ -1,4 +1,4 @@
-package model;
+package steven.inventoryproject.model;
 
 public class Outsourced extends Part {
     private String companyName;

@@ -1,4 +1,4 @@
-package model;
+package steven.inventoryproject.model;
 
 public class InHouse extends Part {
     private int machineId;

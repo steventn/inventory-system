@@ -1,4 +1,4 @@
-package model;
+package steven.inventoryproject.model;
 
 public class Product {
     private Part part;

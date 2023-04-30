@@ -1,8 +1,8 @@
-package view;
+package steven.inventoryproject.view;
 
 import javafx.scene.control.Label;
 
-public class InHouseView {
+public class OutsourcedView {
     private Label idLabel;
     private Label nameLabel;
     private Label stockLabel;
@@ -10,16 +10,16 @@ public class InHouseView {
 
     private Label maxLabel;
     private Label minLabel;
-    private Label machineIdLabel;
+    private Label companyName;
 
-    public InHouseView() {
+    public OutsourcedView() {
         idLabel = new Label();
         nameLabel = new Label();
         stockLabel = new Label();
         priceLabel = new Label();
         maxLabel = new Label();
         minLabel = new Label();
-        machineIdLabel = new Label();
+        companyName = new Label();
     }
 
 
