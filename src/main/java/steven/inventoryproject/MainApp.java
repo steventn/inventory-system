@@ -12,7 +12,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Pane myPane = (Pane)FXMLLoader.load(getClass().getResource
-                ("fxml_mainview.fxml"));
+                ("MainView.fxml"));
         Scene scene = new Scene(myPane);
         stage.setTitle("Inventory Management System");
         stage.setScene(scene);
