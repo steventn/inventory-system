@@ -1,4 +1,5 @@
-package steven.inventoryproject.model; /**
+package steven.inventoryproject.model;
+/**
 * Supplied class Part.java 
  */
 

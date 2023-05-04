@@ -4,52 +4,66 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
-    private static ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
-    public static void addPart(Part newPart) {
+    public void addPart(Part newPart) {
         allParts.add(newPart);
     }
 
-    public static Part lookupPart(int partId) {
+    public Part lookupPart(int partId) {
+        return allParts.get(partId);
     }
 
-    public static ObservableList<Part> lookupPart(String partName) {
-
+    public ObservableList<Part> lookupPart(String partName) {
+        ObservableList<Part> filteredList = FXCollections.observableArrayList();
+        for (Part part : allParts) {
+            if (part.getName().contains(partName)) {
+                filteredList.add(part);
+            }
+        }
+        return filteredList;
     }
 
-    public static void updatePart(int index) {
-
+    public void updatePart(int index, Part selectedPart) {
+        allParts.set(index, selectedPart);
     }
 
-    public static boolean deletePart(Part selectedPart) {
-
+    public boolean deletePart(Part selectedPart) {
+        return allParts.remove(selectedPart);
     }
 
-    public static ObservableList<Part> getAllParts() {
+    public ObservableList<Part> getAllParts() {
         return allParts;
     }
 
-    public static void addPart(Product newProduct) {
+    public void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
 
-    public static Product lookupProduct(int productId) {
+    public Product lookupProduct(int productId) {
+        return allProducts.get(productId);
     }
 
-    public static ObservableList<Product> lookupProduct(String productName) {
-
+    public ObservableList<Product> lookupProduct(String productName) {
+        ObservableList<Product> filteredList = FXCollections.observableArrayList();
+        for (Product product : allProducts) {
+            if (product.getName().contains(productName)) {
+                filteredList.add(product);
+            }
+        }
+        return filteredList;
     }
 
-    public static void updateProduct(int index) {
-
+    public void updateProduct(int index, Product newProduct) {
+        allProducts.set(index, newProduct);
     }
 
-    public static boolean deleteProduct(Product selectedProduct) {
-
+    public boolean deleteProduct(Product selectedProduct) {
+        return allProducts.remove(selectedProduct);
     }
 
-    public static ObservableList<Product> getAllProducts() {
+    public ObservableList<Product> getAllProducts() {
         return allProducts;
     }
 }
