@@ -21,19 +21,19 @@
          </toggleGroup></RadioButton>
       <RadioButton fx:id="outsourcedRadioButton" layoutX="341.0" layoutY="69.0" mnemonicParsing="false" onAction="#outsourcedRadioButtonAction" text="Outsourced" toggleGroup="$tgPartType" />
       <Label layoutX="66.0" layoutY="137.0" text="ID" />
-      <Label layoutX="66.0" layoutY="185.0" text="Name" />
-      <Label layoutX="66.0" layoutY="228.0" text="Inv" />
-      <Label layoutX="66.0" layoutY="273.0" text="Price/Cost" />
-      <Label layoutX="66.0" layoutY="322.0" text="Max" />
-      <Label fx:id="partIdNameLabel" layoutX="66.0" layoutY="369.0" text="Machine ID" />
       <TextField fx:id="partIdText" editable="false" layoutX="180.0" layoutY="133.0" promptText="Auto Gen - Disabled" />
+      <Label layoutX="66.0" layoutY="185.0" text="Name" />
       <TextField fx:id="partNameText" layoutX="180.0" layoutY="180.0" />
+      <Label layoutX="66.0" layoutY="228.0" text="Inv" />
       <TextField fx:id="partInventoryText" layoutX="180.0" layoutY="224.0" />
+      <Label layoutX="66.0" layoutY="273.0" text="Price/Cost" />
       <TextField fx:id="partPriceText" layoutX="180.0" layoutY="268.0" />
+      <Label layoutX="66.0" layoutY="322.0" text="Max" />
       <TextField fx:id="partMaxText" layoutX="180.0" layoutY="317.0" />
-      <TextField fx:id="partIdNameText" layoutX="180.0" layoutY="364.0" />
-      <TextField fx:id="partMinText" layoutX="381.0" layoutY="318.0" />
       <Label layoutX="348.0" layoutY="322.0" text="Min" />
+      <TextField fx:id="partMinText" layoutX="381.0" layoutY="318.0" />
+      <Label fx:id="partIdNameLabel" layoutX="66.0" layoutY="369.0" text="Machine ID" />
+      <TextField fx:id="partIdNameText" layoutX="180.0" layoutY="364.0" />
       <Button layoutX="482.0" layoutY="408.0" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
       <Button layoutX="422.0" layoutY="408.0" mnemonicParsing="false" onAction="#saveButtonAction" text="Save" />
    </children>

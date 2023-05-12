@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
 public class AddPartController implements Initializable {
 
     /**
-     * The machine ID/comapny name label for the part.
+     * The machine ID/company name label for the part.
      */
     @FXML
     private Label partIdNameLabel;
@@ -200,7 +200,7 @@ public class AddPartController implements Initializable {
      */
     private void returnToMainScreen(ActionEvent event) throws IOException {
 
-        Parent parent = FXMLLoader.load(getClass().getResource("../view/MainScreen.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("MainView.fxml"));
         Scene scene = new Scene(parent);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
