@@ -7,18 +7,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import steven.inventoryproject.model.Inventory;
 import steven.inventoryproject.model.Part;
-import steven.inventoryproject.model.Product;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.Properties;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -41,7 +37,7 @@ public class MainController implements Initializable {
 
     @FXML
     void addPartsClick(ActionEvent event) throws IOException {
-        Parent addParts = FXMLLoader.load(getClass().getResource("../view/AddPartView.fxml"));
+        Pane addParts = FXMLLoader.load(getClass().getResource("/AddPartView.fxml"));
         Scene scene = new Scene(addParts);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
