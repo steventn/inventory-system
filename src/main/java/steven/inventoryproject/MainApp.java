@@ -11,7 +11,7 @@ import java.io.IOException;
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        Pane myPane = (Pane)FXMLLoader.load(getClass().getResource
+        Pane myPane = FXMLLoader.load(getClass().getResource
                 ("MainView.fxml"));
         Scene scene = new Scene(myPane);
         stage.setTitle("Inventory Management System");

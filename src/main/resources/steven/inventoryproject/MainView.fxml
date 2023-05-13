@@ -4,10 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="steven.inventoryproject.controller.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="steven.inventoryproject.controller.MainController">
    <children>
       <Text layoutX="14.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inventory Management System" wrappingWidth="172.13671875" />
       <AnchorPane layoutX="30.0" layoutY="55.0" prefHeight="100.0" prefWidth="450.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 1;">
@@ -24,6 +26,7 @@
             <Button layoutX="360.0" layoutY="245.0" mnemonicParsing="false" text="Delete" />
             <Button layoutX="300.0" layoutY="245.0" mnemonicParsing="false" text="Modify" />
             <Button layoutX="255.0" layoutY="245.0" mnemonicParsing="false" text="Add" />
+            <TextField fx:id="partSearchField" layoutX="285.0" layoutY="8.0" promptText="Search by Part ID or Name" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="510.0" layoutY="55.0" prefHeight="100.0" prefWidth="450.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 1;">
@@ -40,6 +43,7 @@
             <Button layoutX="360.0" layoutY="245.0" mnemonicParsing="false" text="Delete" />
             <Button layoutX="300.0" layoutY="245.0" mnemonicParsing="false" text="Modify" />
             <Button layoutX="253.0" layoutY="246.0" mnemonicParsing="false" text="Add" />
+            <TextField fx:id="productSearchField" layoutX="284.0" layoutY="8.0" promptText="Search by Part ID or Name" />
          </children>
       </AnchorPane>
       <Button layoutX="878.0" layoutY="351.0" mnemonicParsing="false" text="Exit" />
