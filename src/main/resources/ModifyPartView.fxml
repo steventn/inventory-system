@@ -15,11 +15,11 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <RadioButton fx:id="inHouseRadioButton" layoutX="198.0" layoutY="69.0" mnemonicParsing="false" onAction="#inHouseRadioButtonAction" text="In-House">
+      <RadioButton fx:id="inHouseRadioButton" layoutX="198.0" layoutY="69.0" mnemonicParsing="false" text="In-House">
          <toggleGroup>
             <ToggleGroup fx:id="tgPartType" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="outsourcedRadioButton" layoutX="341.0" layoutY="69.0" mnemonicParsing="false" onAction="#outsourcedRadioButtonAction" text="Outsourced" toggleGroup="$tgPartType" />
+      <RadioButton fx:id="outsourcedRadioButton" layoutX="341.0" layoutY="69.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$tgPartType" />
       <Label layoutX="66.0" layoutY="137.0" text="ID" />
       <TextField fx:id="partIdText" editable="false" layoutX="180.0" layoutY="133.0" promptText="Auto Gen - Disabled" />
       <Label layoutX="66.0" layoutY="185.0" text="Name" />
@@ -34,7 +34,7 @@
       <TextField fx:id="partMinText" layoutX="381.0" layoutY="318.0" />
       <Label fx:id="partIdNameLabel" layoutX="66.0" layoutY="369.0" text="Machine ID" />
       <TextField fx:id="partIdNameText" layoutX="180.0" layoutY="364.0" />
-      <Button layoutX="482.0" layoutY="408.0" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
-      <Button layoutX="422.0" layoutY="408.0" mnemonicParsing="false" onAction="#saveButtonAction" text="Save" />
+      <Button layoutX="482.0" layoutY="408.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="422.0" layoutY="408.0" mnemonicParsing="false" text="Save" />
    </children>
 </AnchorPane>

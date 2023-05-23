@@ -4,66 +4,100 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
-    private static ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private static final ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private static final ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     public static void addPart(Part newPart) {
         allParts.add(newPart);
     }
 
-    public Part lookupPart(int partId) {
-        return allParts.get(partId);
-    }
-
-    public ObservableList<Part> lookupPart(String partName) {
-        ObservableList<Part> filteredList = FXCollections.observableArrayList();
+    public static Part lookupPart(int partId) {
+        Part tempSearchPartID = null;
         for (Part part : allParts) {
-            if (part.getName().contains(partName)) {
-                filteredList.add(part);
+            if (part.getId() == partId) {
+                tempSearchPartID = part;
             }
         }
-        return filteredList;
+        return tempSearchPartID;
     }
 
-    public void updatePart(int index, Part selectedPart) {
+    public static ObservableList<Part> lookupPart(String partName) {
+        ObservableList<Part> partsFound = FXCollections.observableArrayList();
+
+        for (Part part : allParts) {
+            if (part.getName().equals(partName)) {
+                partsFound.add(part);
+            }
+        }
+
+        return partsFound;
+    }
+
+    public static void updatePart(int index, Part selectedPart) {
         allParts.set(index, selectedPart);
     }
 
-    public boolean deletePart(Part selectedPart) {
-        return allParts.remove(selectedPart);
+    public static boolean deletePart(Part selectedPart) {
+        if (allParts.contains(selectedPart)) {
+            allParts.remove(selectedPart);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public ObservableList<Part> getAllParts() {
+    public static ObservableList<Part> getAllParts() {
         return allParts;
     }
 
-    public void addProduct(Product newProduct) {
+    public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
 
-    public Product lookupProduct(int productId) {
-        return allProducts.get(productId);
+    public static Product lookupProduct(int productId) {
+        Product tempSearchProductID = null;
+        for (Product product : Inventory.getAllProducts()) {
+            if (product.getId() == productId) {
+                tempSearchProductID = product;
+            }
+        }
+        return tempSearchProductID;
     }
 
-    public ObservableList<Product> lookupProduct(String productName) {
+    public static ObservableList<Product> lookupProduct(String productName) {
         ObservableList<Product> filteredList = FXCollections.observableArrayList();
+
         for (Product product : allProducts) {
-            if (product.getName().contains(productName)) {
+            if (product.getName().equals(productName)) {
                 filteredList.add(product);
             }
         }
+
         return filteredList;
     }
 
-    public void updateProduct(int index, Product newProduct) {
-        allProducts.set(index, newProduct);
+    public static void updateProduct(int id, Product newProduct) {
+        int index = -1;
+        for (Product Product : Inventory.getAllProducts()) {
+            index++;
+            if (Product.getId() == id) {
+                Inventory.getAllProducts().set(index, newProduct);
+            }
+        }
     }
 
-    public boolean deleteProduct(Product selectedProduct) {
-        return allProducts.remove(selectedProduct);
+    public static boolean deleteProduct(Product selectedProduct) {
+        if (allProducts.contains(selectedProduct)) {
+            allProducts.remove(selectedProduct);
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    public ObservableList<Product> getAllProducts() {
+    public static ObservableList<Product> getAllProducts() {
         return allProducts;
     }
 }

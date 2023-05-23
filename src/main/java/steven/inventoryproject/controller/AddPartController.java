@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import steven.inventoryproject.model.InHouse;
 import steven.inventoryproject.model.Inventory;
@@ -118,7 +119,6 @@ public class AddPartController implements Initializable {
      */
     @FXML
     void inHouseRadioButtonAction(ActionEvent event) {
-
         partIdNameLabel.setText("Machine ID");
     }
 
@@ -129,7 +129,6 @@ public class AddPartController implements Initializable {
      */
     @FXML
     void outsourcedRadioButtonAction(ActionEvent event) {
-
         partIdNameLabel.setText("Company Name");
     }
 
@@ -145,7 +144,7 @@ public class AddPartController implements Initializable {
     @FXML
     void saveButtonAction(ActionEvent event) throws IOException {
 
-        try {
+//        try {
             int id = 0;
             String name = partNameText.getText();
             Double price = Double.parseDouble(partPriceText.getText());
@@ -160,7 +159,6 @@ public class AddPartController implements Initializable {
                 displayAlert(5);
             } else {
                 if (minValid(min, max) && inventoryValid(min, max, stock)) {
-
                     if (inHouseRadioButton.isSelected()) {
                         try {
                             machineId = Integer.parseInt(partIdNameText.getText());
@@ -187,9 +185,10 @@ public class AddPartController implements Initializable {
                     }
                 }
             }
-        } catch(Exception e) {
-            displayAlert(1);
-        }
+//        } catch(Exception e) {
+//            System.out.println(e);
+//            displayAlert(1);
+//        }
     }
 
     /**
@@ -199,9 +198,9 @@ public class AddPartController implements Initializable {
      * @throws IOException From FXMLLoader.
      */
     private void returnToMainScreen(ActionEvent event) throws IOException {
-
-        Parent parent = FXMLLoader.load(getClass().getResource("MainView.fxml"));
-        Scene scene = new Scene(parent);
+        Pane myPane = FXMLLoader.load(getClass().getResource
+                ("/MainView.fxml"));
+        Scene scene = new Scene(myPane);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
@@ -298,6 +297,6 @@ public class AddPartController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        inHouseRadioButton.setSelected(true);
+//        inHouseRadioButton.setSelected(true);
     }
 }
