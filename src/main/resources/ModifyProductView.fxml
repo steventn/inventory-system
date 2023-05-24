@@ -44,7 +44,7 @@
             </TableView>
             <Button layoutX="555.0" layoutY="489.0" mnemonicParsing="false" text="Remove Associated Part" />
             <Button layoutX="555.0" layoutY="524.0" mnemonicParsing="false" text="Save" />
-            <Button layoutX="636.0" layoutY="524.0" mnemonicParsing="false" text="Cancel" />
+            <Button layoutX="636.0" layoutY="524.0" mnemonicParsing="false" text="Cancel" onAction="#cancelButtonAction"/>
          </children>
       </AnchorPane>
    </children>

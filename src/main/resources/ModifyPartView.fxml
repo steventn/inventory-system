@@ -34,7 +34,7 @@
       <TextField fx:id="partMinText" layoutX="381.0" layoutY="318.0" />
       <Label fx:id="partIdNameLabel" layoutX="66.0" layoutY="369.0" text="Machine ID" />
       <TextField fx:id="partIdNameText" layoutX="180.0" layoutY="364.0" />
-      <Button layoutX="482.0" layoutY="408.0" mnemonicParsing="false" text="Cancel" />
+      <Button layoutX="482.0" layoutY="408.0" mnemonicParsing="false" text="Cancel" onAction="#cancelButtonAction"/>
       <Button layoutX="422.0" layoutY="408.0" mnemonicParsing="false" text="Save" />
    </children>
 </AnchorPane>

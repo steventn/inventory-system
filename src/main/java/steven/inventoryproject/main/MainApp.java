@@ -5,9 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import steven.inventoryproject.model.InHouse;
-import steven.inventoryproject.model.Inventory;
-import steven.inventoryproject.model.Part;
 
 import java.io.IOException;
 

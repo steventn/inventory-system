@@ -23,7 +23,7 @@
               </columns>
             </TableView>
             <Label layoutX="18.0" layoutY="14.0" prefHeight="17.0" prefWidth="35.0" text="Parts" />
-            <Button layoutX="360.0" layoutY="245.0" mnemonicParsing="false" text="Delete" />
+            <Button layoutX="360.0" layoutY="245.0" mnemonicParsing="false" text="Delete" onAction="#deletePartsClick"/>
             <Button fx:id="modifyPartsButton" layoutX="300.0" layoutY="245.0" mnemonicParsing="false" text="Modify" onAction="#modifyPartsClick"/>
             <Button fx:id="addPartsButton" layoutX="255.0" layoutY="245.0" mnemonicParsing="false" text="Add" onAction="#addPartsClick"/>
             <TextField fx:id="partSearchField" layoutX="285.0" layoutY="8.0" promptText="Search by Part ID or Name" onAction="#searchParts"/>
