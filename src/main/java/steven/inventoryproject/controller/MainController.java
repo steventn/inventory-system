@@ -22,6 +22,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
+    private static Part modifyPart;
     @FXML
     private TableView<Part> allPartsTable;
     @FXML
@@ -51,8 +52,12 @@ public class MainController implements Initializable {
     @FXML
     private ObservableList<Part> partsList = FXCollections.observableArrayList();
 
+    public static Part getPartToModify() {
+        return modifyPart;
+    }
+
     @FXML
-    void addPartsClick(ActionEvent event) throws IOException {
+    void addPartsAction(ActionEvent event) throws IOException {
         Pane addParts = FXMLLoader.load(getClass().getResource("/AddPartView.fxml"));
         Scene scene = new Scene(addParts);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -61,16 +66,22 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void modifyPartsClick(ActionEvent event) throws IOException {
-        Pane addParts = FXMLLoader.load(getClass().getResource("/ModifyPartView.fxml"));
-        Scene scene = new Scene(addParts);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+    void modifyPartsAction(ActionEvent event) throws IOException {
+        modifyPart = allPartsTable.getSelectionModel().getSelectedItem();
+
+        if (modifyPart == null) {
+            displayAlert(3);
+        } else {
+            Pane addParts = FXMLLoader.load(getClass().getResource("/ModifyPartView.fxml"));
+            Scene scene = new Scene(addParts);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+        }
     }
 
     @FXML
-    void deletePartsClick(ActionEvent event) throws IOException {
+    void deletePartsAction(ActionEvent event) throws IOException {
         Part selectedPart = allPartsTable.getSelectionModel().getSelectedItem();
 
         if (selectedPart == null) {

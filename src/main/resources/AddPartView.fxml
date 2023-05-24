@@ -18,7 +18,8 @@
         <RadioButton fx:id="inHouseRadioButton" layoutX="198.0" layoutY="69.0" mnemonicParsing="false" onAction="#inHouseRadioButtonAction" text="In-House">
             <toggleGroup>
                 <ToggleGroup fx:id="tgPartType" />
-            </toggleGroup></RadioButton>
+            </toggleGroup>
+        </RadioButton>
         <RadioButton fx:id="outsourcedRadioButton" layoutX="341.0" layoutY="69.0" mnemonicParsing="false" onAction="#outsourcedRadioButtonAction" text="Outsourced" toggleGroup="$tgPartType" />
         <Label layoutX="66.0" layoutY="137.0" text="ID" />
         <Label layoutX="66.0" layoutY="185.0" text="Name" />

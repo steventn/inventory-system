@@ -9,6 +9,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import steven.inventoryproject.model.InHouse;
+import steven.inventoryproject.model.Inventory;
+import steven.inventoryproject.model.Outsourced;
+import steven.inventoryproject.model.Part;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,71 +20,100 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ModifyPartController implements Initializable {
-    /**
-     * The machine ID/company name label for the part.
-     */
     @FXML
     private Label partIdNameLabel;
-
-    /**
-     * The in-house radio button.
-     */
     @FXML
     private RadioButton inHouseRadioButton;
-
-    /**
-     * The toggle group for the radio buttons.
-     */
     @FXML
     private ToggleGroup tgPartType;
-
-    /**
-     * The outsourced radio button.
-     */
     @FXML
     private RadioButton outsourcedRadioButton;
-
-    /**
-     * The part ID text field.
-     */
     @FXML
     private TextField partIdText;
-
-    /**
-     * The part name text field.
-     */
     @FXML
     private TextField partNameText;
-
-    /**
-     * The part inventory text field.
-     */
     @FXML
     private TextField partInventoryText;
-
-    /**
-     * The part price text field.
-     */
     @FXML
     private TextField partPriceText;
-
-    /**
-     * The part maximum level text field.
-     */
     @FXML
     private TextField partMaxText;
-
-    /**
-     * The machine ID/company name text field for the part.
-     */
     @FXML
     private TextField partIdNameText;
-
-    /**
-     * The part minimum level text field.
-     */
     @FXML
     private TextField partMinText;
+
+    @FXML
+    void inHouseRadioButtonAction(ActionEvent event) {
+        partIdNameLabel.setText("Machine ID");
+    }
+
+    @FXML
+    void outsourcedRadioButtonAction(ActionEvent event) {
+        partIdNameLabel.setText("Company Name");
+    }
+
+    @FXML
+    void saveButtonAction(ActionEvent event) throws IOException {
+        try {
+            int id = Inventory.getPartId();
+            String name = partNameText.getText();
+            Double price = Double.parseDouble(partPriceText.getText());
+            int stock = Integer.parseInt(partInventoryText.getText());
+            int min = Integer.parseInt(partMinText.getText());
+            int max = Integer.parseInt(partMaxText.getText());
+            int machineId;
+            String companyName;
+            boolean partAddSuccessful = false;
+
+            if (name.isEmpty()) {
+                displayAlert(1);
+                return;
+            }
+
+            if (min <= 0 || min >= max) {
+                displayAlert(2);
+                return;
+            }
+            if (stock < min || stock > max) {
+                displayAlert(3);
+                return;
+            }
+
+            if (price < 0) {
+                displayAlert(4);
+                return;
+            }
+
+            if (inHouseRadioButton.isSelected()) {
+                try {
+                    machineId = Integer.parseInt(partIdNameText.getText());
+                    InHouse newInHousePart = new InHouse(id, name, price, stock, min, max, machineId);
+                    newInHousePart.setId(Inventory.getPartId());
+                    Inventory.addPart(newInHousePart);
+                    partAddSuccessful = true;
+                } catch (NumberFormatException e) {
+                    displayAlert(5);
+                    return;
+                }
+            }
+
+            if (outsourcedRadioButton.isSelected()) {
+                companyName = partIdNameText.getText();
+                Outsourced newOutsourcedPart = new Outsourced(id, name, price, stock, min, max, companyName);
+                newOutsourcedPart.setId(Inventory.getPartId());
+                Inventory.addPart(newOutsourcedPart);
+                partAddSuccessful = true;
+            }
+
+            if (partAddSuccessful) {
+                Inventory.getNewPartId();
+                returnToMainScreen(event);
+            }
+        } catch (NumberFormatException e) {
+            displayAlert(6);
+        }
+    }
 
     @FXML
     void cancelButtonAction(ActionEvent event) throws IOException {
@@ -103,8 +136,70 @@ public class ModifyPartController implements Initializable {
         stage.show();
     }
 
+    private void displayAlert(int alertType) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+
+        switch (alertType) {
+            case 1:
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: Empty or Invalid Field");
+                alert.setContentText("Fields cannot be empty or invalid.");
+                alert.showAndWait();
+                break;
+            case 2:
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: Invalid Min value");
+                alert.setContentText("Min must be a number greater than 0 and less than Max.");
+                alert.showAndWait();
+                break;
+            case 3:
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: Invalid Inventory value");
+                alert.setContentText("Inventory must be a number equal to or between Min and Max.");
+                alert.showAndWait();
+                break;
+            case 4:
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: Invalid Price value");
+                alert.setContentText("Price must be greater than 0.");
+                alert.showAndWait();
+                break;
+            case 5:
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: Invalid Machine ID value");
+                alert.setContentText("Machine ID may only contain numbers.");
+                alert.showAndWait();
+                break;
+            case 6:
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: Adding Part");
+                alert.setContentText("Form contains blank fields or invalid values.");
+                alert.showAndWait();
+                break;
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        Part modifyPart = MainController.getPartToModify();
 
+        if (modifyPart instanceof InHouse) {
+            inHouseRadioButton.setSelected(true);
+            partIdNameLabel.setText("Machine ID");
+            partIdNameText.setText(String.valueOf(((InHouse) modifyPart).getMachineId()));
+        }
+
+        if (modifyPart instanceof Outsourced){
+            outsourcedRadioButton.setSelected(true);
+            partIdNameLabel.setText("Company Name");
+            partIdNameText.setText(((Outsourced) modifyPart).getCompanyName());
+        }
+
+        partIdText.setText(String.valueOf(modifyPart.getId()));
+        partNameText.setText(modifyPart.getName());
+        partInventoryText.setText(String.valueOf(modifyPart.getStock()));
+        partPriceText.setText(String.valueOf(modifyPart.getPrice()));
+        partMaxText.setText(String.valueOf(modifyPart.getMax()));
+        partMinText.setText(String.valueOf(modifyPart.getMin()));
     }
 }
