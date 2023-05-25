@@ -93,7 +93,7 @@ public class AddPartController implements Initializable {
                 try {
                     machineId = Integer.parseInt(partIdNameText.getText());
                     InHouse newInHousePart = new InHouse(id, name, price, stock, min, max, machineId);
-                    newInHousePart.setId(Inventory.getPartId());
+                    newInHousePart.setId(id);
                     Inventory.addPart(newInHousePart);
                     partAddSuccessful = true;
                 } catch (NumberFormatException e) {

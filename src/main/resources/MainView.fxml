@@ -16,10 +16,10 @@
          <children>
             <TableView fx:id="allPartsTable" layoutX="18.0" layoutY="39.0" prefHeight="200.0" prefWidth="415.0">
               <columns>
-                <TableColumn fx:id="partId" prefWidth="75.0" text="Part ID" />
-                <TableColumn fx:id="partName" prefWidth="75.0" text="Part Name" />
-                  <TableColumn fx:id="partInventoryLevel" prefWidth="127.0" text="Inventory Level" />
-                  <TableColumn fx:id="partPricePerUnit" prefWidth="141.0" text="Price/ Cost per Unit" />
+                 <TableColumn fx:id="partId" prefWidth="75.0" text="Part ID" />
+                 <TableColumn fx:id="partName" prefWidth="75.0" text="Part Name" />
+                 <TableColumn fx:id="partInventory" prefWidth="127.0" text="Inventory Level" />
+                 <TableColumn fx:id="partPrice" prefWidth="141.0" text="Price/ Cost per Unit" />
               </columns>
             </TableView>
             <Label layoutX="18.0" layoutY="14.0" prefHeight="17.0" prefWidth="35.0" text="Parts" />
@@ -33,10 +33,10 @@
          <children>
             <TableView id="allProductsTable" fx:id="allProducts1" layoutX="18.0" layoutY="39.0" prefHeight="200.0" prefWidth="415.0">
                <columns>
-                  <TableColumn fx:id="productId1" prefWidth="75.0" text="Product ID" />
-                  <TableColumn fx:id="productName1" prefWidth="75.0" text="Product Name" />
-                  <TableColumn fx:id="productInventoryLevel1" prefWidth="127.0" text="Inventory Level" />
-                  <TableColumn fx:id="productPricePerUnit1" prefWidth="141.0" text="Price/ Cost per Unit" />
+                  <TableColumn fx:id="productId" prefWidth="75.0" text="Product ID" />
+                  <TableColumn fx:id="productName" prefWidth="75.0" text="Product Name" />
+                  <TableColumn fx:id="productInventory" prefWidth="127.0" text="Inventory Level" />
+                  <TableColumn fx:id="productPrice" prefWidth="141.0" text="Price/ Cost per Unit" />
                </columns>
             </TableView>
             <Label layoutX="18.0" layoutY="14.0" prefHeight="17.0" prefWidth="52.0" text="Products" />

@@ -65,6 +65,11 @@ public class Inventory {
         return ++lastProductId;
     }
 
+    public static int getProductId() {
+        return lastProductId;
+    }
+
+
     public static void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
