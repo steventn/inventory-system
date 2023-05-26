@@ -182,7 +182,6 @@ public class AddPartController implements Initializable {
                 break;
         }
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inHouseRadioButton.setSelected(true);

@@ -1,11 +1,15 @@
 package steven.inventoryproject.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -16,24 +20,39 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-public class AddProductController {
+
+public class AddProductController implements Initializable{
+    private ObservableList<Part> associatedPartsTable = FXCollections.observableArrayList();
+
     public TextField productIdText;
     public TextField productMaxText;
     public TextField productMinText;
     public TextField productNameText;
     public TextField productInventoryText;
     public TextField productPriceText;
-    public TableView allPartsTable;
+    public TableView<Part> allPartsTable;
     public TableColumn<Part, Integer> partId;
     public TableColumn<Part, String> partName;
     public TableColumn<Part, Integer> partInventory;
     public TableColumn<Part, Double> partPrice;
-    public TableView allAssociatedPartsTable;
-    public TableColumn associatedPartsId;
-    public TableColumn associatedPartsName;
-    public TableColumn associatedPartsInventory;
-    public TableColumn associatedPartsPrice;
+    public TableView<Part> allAssociatedPartsTable;
+    public TableColumn<Part, Integer> associatedPartsId;
+    public TableColumn<Part, String> associatedPartsName;
+    public TableColumn<Part, Integer> associatedPartsInventory;
+    public TableColumn<Part, Double> associatedPartsPrice;
 
+    @FXML
+    void addButtonAction(ActionEvent event) throws IOException {
+        Part selectedPart = allPartsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedPart == null) {
+            displayAlert(5);
+        } else {
+            associatedPartsTable.add(selectedPart);
+            allAssociatedPartsTable.setItems(associatedPartsTable);
+        }
+
+    }
     @FXML
     void saveButtonAction(ActionEvent event) throws IOException {
         try {
@@ -65,6 +84,9 @@ public class AddProductController {
             }
 
             Product newProduct = new Product(id, name, price, stock, min, max);
+            for (Part part : associatedPartsTable) {
+                newProduct.addAssociatedPart(part);
+            }
             newProduct.setId(id);
             Inventory.addProduct(newProduct);
             partAddSuccessful = true;
@@ -142,11 +164,18 @@ public class AddProductController {
         }
     }
 
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         allPartsTable.setItems(Inventory.getAllParts());
         partId.setCellValueFactory(new PropertyValueFactory<>("id"));
         partName.setCellValueFactory(new PropertyValueFactory<>("name"));
         partInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        associatedPartsId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        associatedPartsName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        associatedPartsInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        associatedPartsPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+
     }
 }

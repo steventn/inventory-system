@@ -31,7 +31,7 @@
       </AnchorPane>
       <AnchorPane layoutX="510.0" layoutY="55.0" prefHeight="100.0" prefWidth="450.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 1;">
          <children>
-            <TableView id="allProductsTable" fx:id="allProducts1" layoutX="18.0" layoutY="39.0" prefHeight="200.0" prefWidth="415.0">
+            <TableView fx:id="allProductsTable" layoutX="18.0" layoutY="39.0" prefHeight="200.0" prefWidth="415.0">
                <columns>
                   <TableColumn fx:id="productId" prefWidth="75.0" text="Product ID" />
                   <TableColumn fx:id="productName" prefWidth="75.0" text="Product Name" />
@@ -40,12 +40,12 @@
                </columns>
             </TableView>
             <Label layoutX="18.0" layoutY="14.0" prefHeight="17.0" prefWidth="52.0" text="Products" />
-            <Button layoutX="360.0" layoutY="245.0" mnemonicParsing="false" text="Delete" />
-            <Button fx:id="modifyProductsButton" layoutX="300.0" layoutY="245.0" mnemonicParsing="false" text="Modify" onAction="#modifyProductsClick"/>
-            <Button fx:id="addProductsButton" layoutX="253.0" layoutY="246.0" mnemonicParsing="false" text="Add" onAction="#addProductsClick"/>
-            <TextField fx:id="productSearchField" layoutX="284.0" layoutY="8.0" promptText="Search by Part ID or Name" />
+            <Button layoutX="360.0" layoutY="245.0" mnemonicParsing="false" text="Delete" onAction="#deleteProductsAction"/>
+            <Button fx:id="modifyProductsButton" layoutX="300.0" layoutY="245.0" mnemonicParsing="false" text="Modify" onAction="#modifyProductsAction"/>
+            <Button fx:id="addProductsButton" layoutX="253.0" layoutY="246.0" mnemonicParsing="false" text="Add" onAction="#addProductsAction"/>
+            <TextField fx:id="productSearchField" layoutX="284.0" layoutY="8.0" promptText="Search by Part ID or Name" onAction="#searchProducts"/>
          </children>
       </AnchorPane>
-      <Button layoutX="878.0" layoutY="351.0" mnemonicParsing="false" text="Exit" onAction="#onActionExitMainScreen"/>
+      <Button layoutX="878.0" layoutY="351.0" mnemonicParsing="false" text="Exit" onAction="#exitMainScreen"/>
    </children>
 </AnchorPane>

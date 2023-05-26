@@ -32,9 +32,9 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Part, String> partName;
     @FXML
-    private TableColumn<Part, Integer> partInventoryLevel;
+    private TableColumn<Part, Integer> partInventory;
     @FXML
-    private TableColumn<Part, Double> partPricePerUnit;
+    private TableColumn<Part, Double> partPrice;
     @FXML
     private TextField partSearchField;
     @FXML
@@ -44,13 +44,16 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn productName;
     @FXML
-    private TableColumn productInventoryLevel;
+    private TableColumn productInventory;
     @FXML
-    private TableColumn productPricePerUnit;
+    private TableColumn productPrice;
     @FXML
     private TextField productSearchField;
     @FXML
     private ObservableList<Part> partsList = FXCollections.observableArrayList();
+
+    public MainController() {
+    }
 
     public static Part getPartToModify() {
         return modifyPart;
@@ -119,7 +122,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void addProductsClick(ActionEvent event) throws IOException {
+    void addProductsAction(ActionEvent event) throws IOException {
         Pane addParts = FXMLLoader.load(getClass().getResource("/AddProductView.fxml"));
         Scene scene = new Scene(addParts);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -128,7 +131,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void modifyProductsClick(ActionEvent event) throws IOException {
+    void modifyProductsAction(ActionEvent event) throws IOException {
         Pane addParts = FXMLLoader.load(getClass().getResource("/ModifyProductView.fxml"));
         Scene scene = new Scene(addParts);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -137,7 +140,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void deleteProdutsClick(ActionEvent event) throws IOException {
+    void deleteProductsAction(ActionEvent event) throws IOException {
         Product selectedProduct = allProductsTable.getSelectionModel().getSelectedItem();
 
         if (selectedProduct == null) {
@@ -155,7 +158,27 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void onActionExitMainScreen(ActionEvent event) {
+    void searchProducts(ActionEvent event) throws IOException {
+        ObservableList<Product> allProducts = Inventory.getAllProducts();
+        ObservableList<Product> productsFound = FXCollections.observableArrayList();
+        String searchText = productSearchField.getText();
+
+        for (Product product : allProducts) {
+            if (String.valueOf(product.getId()).contains(searchText) ||
+                    product.getName().contains(searchText)) {
+                productsFound.add(product);
+            }
+        }
+
+        allProductsTable.setItems(productsFound);
+
+        if (productsFound.size() == 0) {
+            displayAlert(1);
+        }
+    }
+
+    @FXML
+    void exitMainScreen(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK) {
@@ -203,9 +226,14 @@ public class MainController implements Initializable {
         allPartsTable.setItems(Inventory.getAllParts());
         partId.setCellValueFactory(new PropertyValueFactory<>("id"));
         partName.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partInventoryLevel.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        partPricePerUnit.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        allProductsTable.setItems(Inventory.getAllProducts());
+        productId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
     }
 
 }
