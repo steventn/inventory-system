@@ -18,33 +18,33 @@
             <Label layoutX="39.0" layoutY="206.0" text="Price" />
             <Label layoutX="41.0" layoutY="239.0" text="Max" />
             <Label layoutX="42.0" layoutY="267.0" text="Min" />
-            <TextField layoutX="103.0" layoutY="84.0" />
-            <TextField layoutX="103.0" layoutY="227.0" />
-            <TextField layoutX="103.0" layoutY="263.0" />
-            <TextField layoutX="103.0" layoutY="118.0" />
-            <TextField layoutX="103.0" layoutY="161.0" />
-            <TextField layoutX="103.0" layoutY="194.0" />
-            <TableView layoutX="319.0" layoutY="39.0" prefHeight="200.0" prefWidth="410.0">
+            <TextField fx:id="productIdText" layoutX="103.0" layoutY="84.0" />
+            <TextField fx:id="productMaxText" layoutX="103.0" layoutY="227.0" />
+            <TextField fx:id="productMinText" layoutX="103.0" layoutY="263.0" />
+            <TextField fx:id="productNameText" layoutX="103.0" layoutY="118.0" />
+            <TextField fx:id="productInventoryText" layoutX="103.0" layoutY="161.0" />
+            <TextField fx:id="productPriceText" layoutX="103.0" layoutY="194.0" />
+            <TableView fx:id="allPartsTable" layoutX="319.0" layoutY="39.0" prefHeight="200.0" prefWidth="410.0">
               <columns>
-                <TableColumn prefWidth="82.0" text="Part ID" />
-                <TableColumn prefWidth="82.0" text="Part Name" />
-                  <TableColumn prefWidth="117.0" text="Inventory Level" />
-                  <TableColumn prefWidth="128.0" text="Price/ Cost per Unit" />
+                <TableColumn fx:id="partId" prefWidth="82.0" text="Part ID" />
+                <TableColumn fx:id="partName" prefWidth="82.0" text="Part Name" />
+                  <TableColumn fx:id="partInventory" prefWidth="117.0" text="Inventory Level" />
+                  <TableColumn fx:id="partPrice" prefWidth="128.0" text="Price/ Cost per Unit" />
               </columns>
             </TableView>
-            <Button layoutX="643.0" layoutY="251.0" mnemonicParsing="false" text="Add" />
-            <TableView layoutX="319.0" layoutY="284.0" prefHeight="200.0" prefWidth="410.0">
+            <Button layoutX="643.0" layoutY="251.0" mnemonicParsing="false" onAction="#addButtonAction" text="Add" />
+            <TableView fx:id="allAssociatedPartsTable" layoutX="319.0" layoutY="284.0" prefHeight="200.0" prefWidth="410.0">
                <columns>
-                  <TableColumn prefWidth="82.0" text="Part ID" />
-                  <TableColumn prefWidth="82.0" text="Part Name" />
-                  <TableColumn prefWidth="117.0" text="Inventory Level" />
-                  <TableColumn prefWidth="128.0" text="Price/ Cost per Unit" />
+                  <TableColumn fx:id="associatedPartsId" prefWidth="82.0" text="Part ID" />
+                  <TableColumn fx:id="associatedPartsName" prefWidth="82.0" text="Part Name" />
+                  <TableColumn fx:id="associatedPartsInventory" prefWidth="117.0" text="Inventory Level" />
+                  <TableColumn fx:id="associatedPartsPrice" prefWidth="128.0" text="Price/ Cost per Unit" />
                </columns>
             </TableView>
             <Button layoutX="555.0" layoutY="489.0" mnemonicParsing="false" text="Remove Associated Part" />
-            <Button layoutX="555.0" layoutY="524.0" mnemonicParsing="false" text="Save" />
+            <Button layoutX="555.0" layoutY="524.0" mnemonicParsing="false" onAction="#saveButtonAction" text="Save" />
             <Button layoutX="636.0" layoutY="524.0" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
-            <TextField fx:id="searchPartsField" layoutX="576.0" layoutY="9.0" promptText="Search by Part ID or Name" />
+            <TextField fx:id="searchPartsField" layoutX="576.0" layoutY="9.0" onAction="#searchParts" promptText="Search by Part ID or Name" />
          </children>
       </AnchorPane>
    </children>

@@ -24,23 +24,40 @@ import java.util.ResourceBundle;
 public class AddProductController implements Initializable{
     private ObservableList<Part> associatedPartsTable = FXCollections.observableArrayList();
 
-    public TextField searchPartsField;
-    public TextField productIdText;
-    public TextField productMaxText;
-    public TextField productMinText;
-    public TextField productNameText;
-    public TextField productInventoryText;
-    public TextField productPriceText;
-    public TableView<Part> allPartsTable;
-    public TableColumn<Part, Integer> partId;
-    public TableColumn<Part, String> partName;
-    public TableColumn<Part, Integer> partInventory;
-    public TableColumn<Part, Double> partPrice;
-    public TableView<Part> allAssociatedPartsTable;
-    public TableColumn<Part, Integer> associatedPartsId;
-    public TableColumn<Part, String> associatedPartsName;
-    public TableColumn<Part, Integer> associatedPartsInventory;
-    public TableColumn<Part, Double> associatedPartsPrice;
+    @FXML
+    private TextField searchPartsField;
+    @FXML
+    private TextField productIdText;
+    @FXML
+    private TextField productMaxText;
+    @FXML
+    private TextField productMinText;
+    @FXML
+    private TextField productNameText;
+    @FXML
+    private TextField productInventoryText;
+    @FXML
+    private TextField productPriceText;
+    @FXML
+    private TableView<Part> allPartsTable;
+    @FXML
+    private TableColumn<Part, Integer> partId;
+    @FXML
+    private TableColumn<Part, String> partName;
+    @FXML
+    private TableColumn<Part, Integer> partInventory;
+    @FXML
+    private TableColumn<Part, Double> partPrice;
+    @FXML
+    private TableView<Part> allAssociatedPartsTable;
+    @FXML
+    private TableColumn<Part, Integer> associatedPartsId;
+    @FXML
+    private TableColumn<Part, String> associatedPartsName;
+    @FXML
+    private TableColumn<Part, Integer> associatedPartsInventory;
+    @FXML
+    private TableColumn<Part, Double> associatedPartsPrice;
 
     @FXML
     void searchParts(ActionEvent event) throws IOException {

@@ -23,6 +23,8 @@ import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
     private static Part modifyPart;
+    private static Product modifyProduct;
+
     @FXML
     private TableView<Part> allPartsTable;
     @FXML
@@ -51,9 +53,6 @@ public class MainController implements Initializable {
     private TextField productSearchField;
     @FXML
     private ObservableList<Part> partsList = FXCollections.observableArrayList();
-
-    public MainController() {
-    }
 
     public static Part getPartToModify() {
         return modifyPart;
@@ -121,6 +120,10 @@ public class MainController implements Initializable {
         }
     }
 
+    public static Product getProductToModify() {
+        return modifyProduct;
+    }
+
     @FXML
     void addProductsAction(ActionEvent event) throws IOException {
         Pane addParts = FXMLLoader.load(getClass().getResource("/AddProductView.fxml"));
@@ -132,11 +135,17 @@ public class MainController implements Initializable {
 
     @FXML
     void modifyProductsAction(ActionEvent event) throws IOException {
-        Pane addParts = FXMLLoader.load(getClass().getResource("/ModifyProductView.fxml"));
-        Scene scene = new Scene(addParts);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
+        modifyProduct = allProductsTable.getSelectionModel().getSelectedItem();
+
+        if (modifyProduct == null) {
+            displayAlert(3);
+        } else {
+            Pane addParts = FXMLLoader.load(getClass().getResource("/ModifyProductView.fxml"));
+            Scene scene = new Scene(addParts);
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            window.setScene(scene);
+            window.show();
+        }
     }
 
     @FXML
