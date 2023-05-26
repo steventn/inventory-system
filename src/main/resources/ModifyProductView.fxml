@@ -7,8 +7,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="steven.inventoryproject.controller.ModifyProductController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="steven.inventoryproject.controller.ModifyProductController">
    <children>
       <AnchorPane layoutX="25.0" layoutY="25.0" prefHeight="550.0" prefWidth="750.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 1;">
          <children>
@@ -44,7 +43,8 @@
             </TableView>
             <Button layoutX="555.0" layoutY="489.0" mnemonicParsing="false" text="Remove Associated Part" />
             <Button layoutX="555.0" layoutY="524.0" mnemonicParsing="false" text="Save" />
-            <Button layoutX="636.0" layoutY="524.0" mnemonicParsing="false" text="Cancel" onAction="#cancelButtonAction"/>
+            <Button layoutX="636.0" layoutY="524.0" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
+            <TextField fx:id="searchPartsField" layoutX="576.0" layoutY="9.0" promptText="Search by Part ID or Name" />
          </children>
       </AnchorPane>
    </children>

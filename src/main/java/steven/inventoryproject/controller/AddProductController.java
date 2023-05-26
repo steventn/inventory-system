@@ -24,6 +24,7 @@ import java.util.ResourceBundle;
 public class AddProductController implements Initializable{
     private ObservableList<Part> associatedPartsTable = FXCollections.observableArrayList();
 
+    public TextField searchPartsField;
     public TextField productIdText;
     public TextField productMaxText;
     public TextField productMinText;
@@ -42,6 +43,26 @@ public class AddProductController implements Initializable{
     public TableColumn<Part, Double> associatedPartsPrice;
 
     @FXML
+    void searchParts(ActionEvent event) throws IOException {
+        ObservableList<Part> allParts = Inventory.getAllParts();
+        ObservableList<Part> partsFound = FXCollections.observableArrayList();
+        String searchText = searchPartsField.getText();
+
+        for (Part part : allParts) {
+            if (String.valueOf(part.getId()).contains(searchText) ||
+                    part.getName().contains(searchText)) {
+                partsFound.add(part);
+            }
+        }
+
+        allPartsTable.setItems(partsFound);
+
+        if (partsFound.size() == 0) {
+            displayAlert(1);
+        }
+    }
+
+    @FXML
     void addButtonAction(ActionEvent event) throws IOException {
         Part selectedPart = allPartsTable.getSelectionModel().getSelectedItem();
 
@@ -51,8 +72,8 @@ public class AddProductController implements Initializable{
             associatedPartsTable.add(selectedPart);
             allAssociatedPartsTable.setItems(associatedPartsTable);
         }
-
     }
+
     @FXML
     void saveButtonAction(ActionEvent event) throws IOException {
         try {
