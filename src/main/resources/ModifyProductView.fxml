@@ -13,16 +13,16 @@
          <children>
             <Label layoutX="36.0" layoutY="31.0" text="Modify Product" />
             <Label layoutX="46.0" layoutY="88.0" text="ID" />
-            <Label layoutX="40.0" layoutY="130.0" text="Name" />
-            <Label layoutX="44.0" layoutY="165.0" text="Inv" />
-            <Label layoutX="39.0" layoutY="206.0" text="Price" />
-            <Label layoutX="41.0" layoutY="239.0" text="Max" />
+            <Label layoutX="40.0" layoutY="122.0" text="Name" />
+            <Label layoutX="44.0" layoutY="163.0" text="Inv" />
+            <Label layoutX="41.0" layoutY="198.0" text="Price" />
+            <Label layoutX="41.0" layoutY="232.0" text="Max" />
             <Label layoutX="42.0" layoutY="267.0" text="Min" />
             <TextField fx:id="productIdText" layoutX="103.0" layoutY="84.0" />
             <TextField fx:id="productMaxText" layoutX="103.0" layoutY="227.0" />
             <TextField fx:id="productMinText" layoutX="103.0" layoutY="263.0" />
             <TextField fx:id="productNameText" layoutX="103.0" layoutY="118.0" />
-            <TextField fx:id="productInventoryText" layoutX="103.0" layoutY="161.0" />
+            <TextField fx:id="productInventoryText" layoutX="103.0" layoutY="160.0" />
             <TextField fx:id="productPriceText" layoutX="103.0" layoutY="194.0" />
             <TableView fx:id="allPartsTable" layoutX="319.0" layoutY="39.0" prefHeight="200.0" prefWidth="410.0">
               <columns>
@@ -32,7 +32,7 @@
                   <TableColumn fx:id="partPrice" prefWidth="128.0" text="Price/ Cost per Unit" />
               </columns>
             </TableView>
-            <Button layoutX="643.0" layoutY="251.0" mnemonicParsing="false" onAction="#addButtonAction" text="Add" />
+            <Button layoutX="643.0" layoutY="250.0" mnemonicParsing="false" onAction="#addButtonAction" text="Add" />
             <TableView fx:id="allAssociatedPartsTable" layoutX="319.0" layoutY="284.0" prefHeight="200.0" prefWidth="410.0">
                <columns>
                   <TableColumn fx:id="associatedPartsId" prefWidth="82.0" text="Part ID" />
@@ -42,9 +42,9 @@
                </columns>
             </TableView>
             <Button layoutX="555.0" layoutY="489.0" mnemonicParsing="false" onAction="#removeAssociatedPartButtonAction" text="Remove Associated Part" />
-            <Button layoutX="555.0" layoutY="524.0" mnemonicParsing="false" onAction="#saveButtonAction" text="Save" />
-            <Button layoutX="636.0" layoutY="524.0" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
-            <TextField fx:id="searchPartsField" layoutX="576.0" layoutY="9.0" onAction="#searchParts" promptText="Search by Part ID or Name" />
+            <Button layoutX="555.0" layoutY="520.0" mnemonicParsing="false" onAction="#saveButtonAction" text="Save" />
+            <Button layoutX="640.0" layoutY="520.0" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
+            <TextField fx:id="searchPartsField" layoutX="567.0" layoutY="8.0" onAction="#searchParts" prefHeight="25.0" prefWidth="160.0" promptText="Search by Part ID or Name" />
          </children>
       </AnchorPane>
    </children>

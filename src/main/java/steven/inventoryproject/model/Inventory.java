@@ -35,7 +35,7 @@ public class Inventory {
         ObservableList<Part> partsFound = FXCollections.observableArrayList();
 
         for (Part part : allParts) {
-            if (part.getName().toLowerCase().equals(partName.toLowerCase())) {
+            if (part.getName().toLowerCase().contains(partName.toLowerCase())) {
                 partsFound.add(part);
             }
         }
@@ -88,7 +88,7 @@ public class Inventory {
         ObservableList<Product> filteredList = FXCollections.observableArrayList();
 
         for (Product product : allProducts) {
-            if (product.getName().toLowerCase().equals(productName.toLowerCase())) {
+            if (product.getName().toLowerCase().contains(productName.toLowerCase())) {
                 filteredList.add(product);
             }
         }

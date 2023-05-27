@@ -6,13 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import steven.inventoryproject.model.*;
 
 import java.io.IOException;
@@ -61,20 +61,27 @@ public class AddProductController implements Initializable{
 
     @FXML
     void searchParts(ActionEvent event) throws IOException {
-        ObservableList<Part> allParts = Inventory.getAllParts();
         ObservableList<Part> partsFound = FXCollections.observableArrayList();
         String searchText = searchPartsField.getText();
 
-        for (Part part : allParts) {
-            if (String.valueOf(part.getId()).contains(searchText) ||
-                    part.getName().contains(searchText)) {
-                partsFound.add(part);
+        if (searchText.isEmpty()) {
+            ObservableList<Part> allParts = Inventory.getAllParts();
+            allPartsTable.setItems(allParts);
+            return;
+        }
+
+        try {
+            Part idPartFound = Inventory.lookupPart(Integer.parseInt(searchText));
+            if (idPartFound != null) {
+                partsFound.add(idPartFound);
             }
+        } catch (NumberFormatException e) {
+            partsFound = Inventory.lookupPart(searchText);
         }
 
         allPartsTable.setItems(partsFound);
 
-        if (partsFound.size() == 0) {
+        if (partsFound.isEmpty()) {
             displayAlert(1);
         }
     }
@@ -179,39 +186,34 @@ public class AddProductController implements Initializable{
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Empty or Invalid Field");
                 alert.setContentText("Fields cannot be empty or invalid.");
-                alert.showAndWait();
                 break;
             case 2:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Invalid Min value");
                 alert.setContentText("Min must be a number greater than 0 and less than Max.");
-                alert.showAndWait();
                 break;
             case 3:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Invalid Inventory value");
                 alert.setContentText("Inventory must be a number equal to or between Min and Max.");
-                alert.showAndWait();
                 break;
             case 4:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Invalid Price value");
                 alert.setContentText("Price must be greater than 0.");
-                alert.showAndWait();
                 break;
             case 5:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Invalid Machine ID value");
                 alert.setContentText("Machine ID may only contain numbers.");
-                alert.showAndWait();
                 break;
             case 6:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Adding Part");
                 alert.setContentText("Form contains blank fields or invalid values.");
-                alert.showAndWait();
                 break;
         }
+        alert.showAndWait();
     }
 
     @Override

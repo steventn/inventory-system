@@ -4,16 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import steven.inventoryproject.model.InHouse;
-import steven.inventoryproject.model.Inventory;
-import steven.inventoryproject.model.Outsourced;
-import steven.inventoryproject.model.Part;
+
+import steven.inventoryproject.model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,8 +25,6 @@ public class AddPartController implements Initializable {
     private Label partIdNameLabel;
     @FXML
     private RadioButton inHouseRadioButton;
-    @FXML
-    private ToggleGroup tgPartType;
     @FXML
     private RadioButton outsourcedRadioButton;
     @FXML
@@ -148,39 +143,34 @@ public class AddPartController implements Initializable {
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Empty or Invalid Field");
                 alert.setContentText("Fields cannot be empty or invalid.");
-                alert.showAndWait();
                 break;
             case 2:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Invalid Min value");
                 alert.setContentText("Min must be a number greater than 0 and less than Max.");
-                alert.showAndWait();
                 break;
             case 3:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Invalid Inventory value");
                 alert.setContentText("Inventory must be a number equal to or between Min and Max.");
-                alert.showAndWait();
                 break;
             case 4:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Invalid Price value");
                 alert.setContentText("Price must be greater than 0.");
-                alert.showAndWait();
                 break;
             case 5:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Invalid Machine ID value");
                 alert.setContentText("Machine ID may only contain numbers.");
-                alert.showAndWait();
                 break;
             case 6:
                 alert.setTitle("Error");
                 alert.setHeaderText("Error: Adding Part");
                 alert.setContentText("Form contains blank fields or invalid values.");
-                alert.showAndWait();
                 break;
         }
+        alert.showAndWait();
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {

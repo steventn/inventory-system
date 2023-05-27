@@ -12,9 +12,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import steven.inventoryproject.model.Part;
-import steven.inventoryproject.model.Inventory;
-import steven.inventoryproject.model.Product;
+
+import steven.inventoryproject.model.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -36,7 +35,7 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Part, Double> partPrice;
     @FXML
-    private TextField partSearchField;
+    private TextField searchPartsField;
     @FXML
     private TableView<Product> allProductsTable;
     @FXML
@@ -48,7 +47,7 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn productPrice;
     @FXML
-    private TextField productSearchField;
+    private TextField searchProductsField;
     @FXML
     private ObservableList<Part> partsList = FXCollections.observableArrayList();
 
@@ -101,9 +100,9 @@ public class MainController implements Initializable {
     @FXML
     void searchParts(ActionEvent event) throws IOException {
         ObservableList<Part> partsFound = FXCollections.observableArrayList();
-        String searchText = partSearchField.getText();
+        String searchText = searchPartsField.getText();
 
-        if (searchText == "") {
+        if (searchText.isEmpty()) {
             ObservableList<Part> allParts = Inventory.getAllParts();
             allPartsTable.setItems(allParts);
             return;
@@ -121,7 +120,7 @@ public class MainController implements Initializable {
         allPartsTable.setItems(partsFound);
 
 
-        if (partsFound.size() == 0) {
+        if (partsFound.isEmpty()) {
             displayAlert(1);
         }
     }
@@ -175,9 +174,9 @@ public class MainController implements Initializable {
     @FXML
     void searchProducts(ActionEvent event) throws IOException {
         ObservableList<Product> productsFound = FXCollections.observableArrayList();
-        String searchText = productSearchField.getText();
+        String searchText = searchProductsField.getText();
 
-        if (searchText == "") {
+        if (searchText.isEmpty()) {
             ObservableList<Product> allProudcts = Inventory.getAllProducts();
             allProductsTable.setItems(allProudcts);
             return;
@@ -194,7 +193,7 @@ public class MainController implements Initializable {
 
         allProductsTable.setItems(productsFound);
 
-        if (productsFound.size() == 0) {
+        if (productsFound.isEmpty()) {
             displayAlert(1);
         }
     }
@@ -217,30 +216,26 @@ public class MainController implements Initializable {
             case 1:
                 alert.setTitle("Information");
                 alert.setHeaderText("Part not found");
-                alert.showAndWait();
                 break;
             case 2:
                 alert.setTitle("Information");
                 alert.setHeaderText("Product not found");
-                alert.showAndWait();
                 break;
             case 3:
                 alertError.setTitle("Error");
                 alertError.setHeaderText("Part not selected");
-                alertError.showAndWait();
                 break;
             case 4:
                 alertError.setTitle("Error");
                 alertError.setHeaderText("Product not selected");
-                alertError.showAndWait();
                 break;
             case 5:
                 alertError.setTitle("Error");
                 alertError.setHeaderText("Parts Associated");
                 alertError.setContentText("All parts must be removed from product before deletion.");
-                alertError.showAndWait();
                 break;
         }
+        alert.showAndWait();
     }
 
     @Override

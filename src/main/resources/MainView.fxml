@@ -26,7 +26,7 @@
             <Button layoutX="360.0" layoutY="245.0" mnemonicParsing="false" text="Delete" onAction="#deletePartsAction"/>
             <Button fx:id="modifyPartsButton" layoutX="300.0" layoutY="245.0" mnemonicParsing="false" text="Modify" onAction="#modifyPartsAction"/>
             <Button fx:id="addPartsButton" layoutX="255.0" layoutY="245.0" mnemonicParsing="false" text="Add" onAction="#addPartsAction"/>
-            <TextField fx:id="partSearchField" layoutX="285.0" layoutY="8.0" promptText="Search by Part ID or Name" onAction="#searchParts"/>
+            <TextField fx:id="searchPartsField" layoutX="285.0" layoutY="8.0" promptText="Search by Part ID or Name" onAction="#searchParts"/>
          </children>
       </AnchorPane>
       <AnchorPane layoutX="510.0" layoutY="55.0" prefHeight="100.0" prefWidth="450.0" style="-fx-border-color: black; -fx-border-radius: 10; -fx-border-width: 1;">
@@ -43,7 +43,7 @@
             <Button layoutX="360.0" layoutY="245.0" mnemonicParsing="false" text="Delete" onAction="#deleteProductsAction"/>
             <Button fx:id="modifyProductsButton" layoutX="300.0" layoutY="245.0" mnemonicParsing="false" text="Modify" onAction="#modifyProductsAction"/>
             <Button fx:id="addProductsButton" layoutX="253.0" layoutY="246.0" mnemonicParsing="false" text="Add" onAction="#addProductsAction"/>
-            <TextField fx:id="productSearchField" layoutX="284.0" layoutY="8.0" promptText="Search by Part ID or Name" onAction="#searchProducts"/>
+            <TextField fx:id="searchProductsField" layoutX="284.0" layoutY="8.0" promptText="Search by Part ID or Name" onAction="#searchProducts"/>
          </children>
       </AnchorPane>
       <Button layoutX="878.0" layoutY="351.0" mnemonicParsing="false" text="Exit" onAction="#exitMainScreen"/>
