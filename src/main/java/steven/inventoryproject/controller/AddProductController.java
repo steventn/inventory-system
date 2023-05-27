@@ -92,6 +92,18 @@ public class AddProductController implements Initializable{
     }
 
     @FXML
+    void removeAssociatedPartButtonAction(ActionEvent event) throws IOException {
+        Part selectedPart = allAssociatedPartsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedPart == null) {
+            displayAlert(5);
+        } else {
+            associatedPartsTable.remove(selectedPart);
+            allAssociatedPartsTable.setItems(associatedPartsTable);
+        }
+    }
+
+    @FXML
     void saveButtonAction(ActionEvent event) throws IOException {
         try {
             int id = Inventory.getProductId();

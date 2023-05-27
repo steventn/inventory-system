@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 public class ModifyProductController implements Initializable{
     private ObservableList<Part> associatedPartsTable = FXCollections.observableArrayList();
+    Product modifyProduct = MainController.getProductToModify();
 
     @FXML
     private TextField searchPartsField;
@@ -92,9 +93,21 @@ public class ModifyProductController implements Initializable{
     }
 
     @FXML
+    void removeAssociatedPartButtonAction(ActionEvent event) throws IOException {
+        Part selectedPart = allAssociatedPartsTable.getSelectionModel().getSelectedItem();
+
+        if (selectedPart == null) {
+            displayAlert(5);
+        } else {
+            associatedPartsTable.remove(selectedPart);
+            modifyProduct.deleteAssociatedPart(selectedPart);
+            allAssociatedPartsTable.setItems(associatedPartsTable);
+        }
+    }
+
+    @FXML
     void saveButtonAction(ActionEvent event) throws IOException {
         try {
-            int id = Inventory.getProductId();
             String name = productNameText.getText();
             Double price = Double.parseDouble(productPriceText.getText());
             int stock = Integer.parseInt(productInventoryText.getText());
@@ -121,16 +134,25 @@ public class ModifyProductController implements Initializable{
                 return;
             }
 
-            Product newProduct = new Product(id, name, price, stock, min, max);
-            for (Part part : associatedPartsTable) {
-                newProduct.addAssociatedPart(part);
+            try {
+                modifyProduct.setName(name);
+                modifyProduct.setMax(max);
+                modifyProduct.setPrice(price);
+                modifyProduct.setMin(min);
+                modifyProduct.setStock(stock);
+
+                for (Part part : associatedPartsTable) {
+                    modifyProduct.addAssociatedPart(part);
+                }
+
+                partAddSuccessful = true;
+            } catch (NumberFormatException e) {
+                displayAlert(5);
+                return;
             }
-            newProduct.setId(id);
-            Inventory.addProduct(newProduct);
-            partAddSuccessful = true;
+
 
             if (partAddSuccessful) {
-                Inventory.getNewProductId();
                 returnToMainScreen(event);
             }
         } catch (NumberFormatException e) {
@@ -204,8 +226,6 @@ public class ModifyProductController implements Initializable{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Product modifyProduct = MainController.getProductToModify();
-
         productIdText.setText(String.valueOf(modifyProduct.getId()));
         productNameText.setText(modifyProduct.getName());
         productInventoryText.setText(String.valueOf(modifyProduct.getStock()));
@@ -219,6 +239,7 @@ public class ModifyProductController implements Initializable{
         partInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        allAssociatedPartsTable.setItems(modifyProduct.getAllAssociatedParts());
         associatedPartsId.setCellValueFactory(new PropertyValueFactory<>("id"));
         associatedPartsName.setCellValueFactory(new PropertyValueFactory<>("name"));
         associatedPartsInventory.setCellValueFactory(new PropertyValueFactory<>("stock"));

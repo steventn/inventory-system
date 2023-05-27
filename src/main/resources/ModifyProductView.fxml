@@ -41,7 +41,7 @@
                   <TableColumn fx:id="associatedPartsPrice" prefWidth="128.0" text="Price/ Cost per Unit" />
                </columns>
             </TableView>
-            <Button layoutX="555.0" layoutY="489.0" mnemonicParsing="false" text="Remove Associated Part" />
+            <Button layoutX="555.0" layoutY="489.0" mnemonicParsing="false" onAction="#removeAssociatedPartButtonAction" text="Remove Associated Part" />
             <Button layoutX="555.0" layoutY="524.0" mnemonicParsing="false" onAction="#saveButtonAction" text="Save" />
             <Button layoutX="636.0" layoutY="524.0" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
             <TextField fx:id="searchPartsField" layoutX="576.0" layoutY="9.0" onAction="#searchParts" promptText="Search by Part ID or Name" />

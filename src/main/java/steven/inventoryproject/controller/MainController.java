@@ -28,8 +28,6 @@ public class MainController implements Initializable {
     @FXML
     private TableView<Part> allPartsTable;
     @FXML
-    private Button addPartsButton;
-    @FXML
     private TableColumn<Part, Integer> partId;
     @FXML
     private TableColumn<Part, String> partName;
@@ -102,18 +100,26 @@ public class MainController implements Initializable {
 
     @FXML
     void searchParts(ActionEvent event) throws IOException {
-        ObservableList<Part> allParts = Inventory.getAllParts();
         ObservableList<Part> partsFound = FXCollections.observableArrayList();
         String searchText = partSearchField.getText();
 
-        for (Part part : allParts) {
-            if (String.valueOf(part.getId()).contains(searchText) ||
-                    part.getName().contains(searchText)) {
-                partsFound.add(part);
+        if (searchText == "") {
+            ObservableList<Part> allParts = Inventory.getAllParts();
+            allPartsTable.setItems(allParts);
+            return;
+        }
+
+        try {
+            Part idPartFound = Inventory.lookupPart(Integer.parseInt(searchText));
+            if (idPartFound != null) {
+                partsFound.add(idPartFound);
             }
+        } catch (NumberFormatException e) {
+            partsFound = Inventory.lookupPart(searchText);
         }
 
         allPartsTable.setItems(partsFound);
+
 
         if (partsFound.size() == 0) {
             displayAlert(1);
@@ -168,15 +174,22 @@ public class MainController implements Initializable {
 
     @FXML
     void searchProducts(ActionEvent event) throws IOException {
-        ObservableList<Product> allProducts = Inventory.getAllProducts();
         ObservableList<Product> productsFound = FXCollections.observableArrayList();
         String searchText = productSearchField.getText();
 
-        for (Product product : allProducts) {
-            if (String.valueOf(product.getId()).contains(searchText) ||
-                    product.getName().contains(searchText)) {
-                productsFound.add(product);
+        if (searchText == "") {
+            ObservableList<Product> allProudcts = Inventory.getAllProducts();
+            allProductsTable.setItems(allProudcts);
+            return;
+        }
+
+        try {
+            Product idProductFound = Inventory.lookupProduct(Integer.parseInt(searchText));
+            if (idProductFound != null) {
+                productsFound.add(idProductFound);
             }
+        } catch (NumberFormatException e) {
+            productsFound = Inventory.lookupProduct(searchText);
         }
 
         allProductsTable.setItems(productsFound);

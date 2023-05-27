@@ -56,7 +56,9 @@ public class ModifyPartController implements Initializable {
     @FXML
     void saveButtonAction(ActionEvent event) throws IOException {
         try {
-            int id = Inventory.getPartId();
+            Part modifyPart = MainController.getPartToModify();
+
+            int id = modifyPart.getId();
             String name = partNameText.getText();
             Double price = Double.parseDouble(partPriceText.getText());
             int stock = Integer.parseInt(partInventoryText.getText());
@@ -88,9 +90,15 @@ public class ModifyPartController implements Initializable {
             if (inHouseRadioButton.isSelected()) {
                 try {
                     machineId = Integer.parseInt(partIdNameText.getText());
-                    InHouse newInHousePart = new InHouse(id, name, price, stock, min, max, machineId);
-                    newInHousePart.setId(Inventory.getPartId());
-                    Inventory.addPart(newInHousePart);
+
+                    InHouse modifyInHousePart = (InHouse) modifyPart;
+                    modifyInHousePart.setName(name);
+                    modifyInHousePart.setMax(max);
+                    modifyInHousePart.setPrice(price);
+                    modifyInHousePart.setMin(min);
+                    modifyInHousePart.setStock(stock);
+                    modifyInHousePart.setMachineId(machineId);
+
                     partAddSuccessful = true;
                 } catch (NumberFormatException e) {
                     displayAlert(5);
@@ -100,14 +108,19 @@ public class ModifyPartController implements Initializable {
 
             if (outsourcedRadioButton.isSelected()) {
                 companyName = partIdNameText.getText();
-                Outsourced newOutsourcedPart = new Outsourced(id, name, price, stock, min, max, companyName);
-                newOutsourcedPart.setId(Inventory.getPartId());
-                Inventory.addPart(newOutsourcedPart);
+
+                Outsourced modifyOutsourcedPart = (Outsourced) modifyPart;
+                modifyOutsourcedPart.setName(name);
+                modifyOutsourcedPart.setMax(max);
+                modifyOutsourcedPart.setPrice(price);
+                modifyOutsourcedPart.setMin(min);
+                modifyOutsourcedPart.setStock(stock);
+                modifyOutsourcedPart.setCompanyName(companyName);
+
                 partAddSuccessful = true;
             }
 
             if (partAddSuccessful) {
-                Inventory.getNewPartId();
                 returnToMainScreen(event);
             }
         } catch (NumberFormatException e) {
