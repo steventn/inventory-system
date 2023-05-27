@@ -215,19 +215,23 @@ public class MainController implements Initializable {
         switch (alertType) {
             case 1:
                 alert.setTitle("Information");
+                alert.setContentText("Info: Not found.");
                 alert.setHeaderText("Part not found");
                 break;
             case 2:
                 alert.setTitle("Information");
-                alert.setHeaderText("Product not found");
+                alert.setHeaderText("Info: Not found.");
+                alert.setContentText("Product not found");
                 break;
             case 3:
                 alertError.setTitle("Error");
-                alertError.setHeaderText("Part not selected");
+                alertError.setHeaderText("Error: Part is empty.");
+                alertError.setContentText("Part not selected");
                 break;
             case 4:
                 alertError.setTitle("Error");
-                alertError.setHeaderText("Product not selected");
+                alertError.setHeaderText("Error: Product is empty.");
+                alertError.setContentText("Product not selected");
                 break;
             case 5:
                 alertError.setTitle("Error");

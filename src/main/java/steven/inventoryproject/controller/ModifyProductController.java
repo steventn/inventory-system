@@ -154,7 +154,7 @@ public class ModifyProductController implements Initializable{
 
                 partAddSuccessful = true;
             } catch (NumberFormatException e) {
-                displayAlert(5);
+                displayAlert(6);
                 return;
             }
 
@@ -214,8 +214,8 @@ public class ModifyProductController implements Initializable{
                 break;
             case 5:
                 alert.setTitle("Error");
-                alert.setHeaderText("Error: Invalid Machine ID value");
-                alert.setContentText("Machine ID may only contain numbers.");
+                alert.setHeaderText("Error: No Part selected");
+                alert.setContentText("Part not selected");
                 break;
             case 6:
                 alert.setTitle("Error");
