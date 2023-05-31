@@ -17,41 +17,87 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-
+/**
+ * The controller class that provides logic for the add part screen of the application.
+ *
+ * @author Steven Nguyen
+ */
 public class AddPartController implements Initializable {
-
-
+    /**
+     * The machine ID/company name label for the part.
+     */
     @FXML
     private Label partIdNameLabel;
-    @FXML
-    private RadioButton inHouseRadioButton;
-    @FXML
-    private RadioButton outsourcedRadioButton;
-    @FXML
-    private TextField partIdText;
-    @FXML
-    private TextField partNameText;
-    @FXML
-    private TextField partInventoryText;
-    @FXML
-    private TextField partPriceText;
-    @FXML
-    private TextField partMaxText;
+    /**
+     * The machine ID/company name text-field for the part.
+     */
     @FXML
     private TextField partIdNameText;
+    /**
+     * The radio button for an in-house part.
+     */
+    @FXML
+    private RadioButton inHouseRadioButton;
+    /**
+     * The radio button for an outsource part.
+     */
+    @FXML
+    private RadioButton outsourcedRadioButton;
+    /**
+     * The name text-field for the part.
+     */
+    @FXML
+    private TextField partNameText;
+    /**
+     * The stock text-field for the part.
+     */
+    @FXML
+    private TextField partInventoryText;
+    /**
+     * The price text-field for the part.
+     */
+    @FXML
+    private TextField partPriceText;
+    /**
+     * The maximum inventory level text-field for the part.
+     */
+    @FXML
+    private TextField partMaxText;
+    /**
+     * The minimum inventory level text-field for the part.
+     */
     @FXML
     private TextField partMinText;
 
+    /**
+     * Sets the label to machine ID when the in-house radio button is selected.
+     *
+     * @param event In-house radio button action
+     */
     @FXML
     void inHouseRadioButtonAction(ActionEvent event) {
         partIdNameLabel.setText("Machine ID");
     }
 
+    /**
+     * Sets the label to company name when the in-house radio button is selected.
+     *
+     * @param event Outsourced radio button action
+     */
     @FXML
     void outsourcedRadioButtonAction(ActionEvent event) {
         partIdNameLabel.setText("Company Name");
     }
 
+    /**
+     * Sets a Part object depending on either In-house or Outsourced selection and adds it to the Inventory.
+     *
+     * @param event Save button action
+     * @throws IOException from FXMLoader
+     *
+     * LOGICAL ERROR: Before adding the returns for each error scenario, alerts would pop up in succession rather than
+     * the first issue that occurred. Adding a return now only displays one alert message.
+     */
     @FXML
     void saveButtonAction(ActionEvent event) throws IOException {
         try {
@@ -114,6 +160,12 @@ public class AddPartController implements Initializable {
         }
     }
 
+    /**
+     * Cancels creation of Part object.
+     *
+     * @param event Cancel button action
+     * @throws IOException from FXML Loader
+     */
     @FXML
     void cancelButtonAction(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -126,6 +178,12 @@ public class AddPartController implements Initializable {
         }
     }
 
+    /**
+     * Loads the MainView screen to return to the Main Screen.
+     *
+     * @param event Main screen action
+     * @throws IOException from FXML Loader
+     */
     private void returnToMainScreen(ActionEvent event) throws IOException {
         Pane myPane = FXMLLoader.load(getClass().getResource
                 ("/MainView.fxml"));
@@ -135,6 +193,11 @@ public class AddPartController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Displays an alert depending on the error condition
+     *
+     * @param alertType Alert message condition
+     */
     private void displayAlert(int alertType) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
@@ -172,6 +235,13 @@ public class AddPartController implements Initializable {
         }
         alert.showAndWait();
     }
+
+    /**
+     * Initializes the controller and sets the part selection to an in-house part.
+     *
+     * @param location The location used to resolve relative path for the root object.
+     * @param resources The resources used to localize the root object.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         inHouseRadioButton.setSelected(true);

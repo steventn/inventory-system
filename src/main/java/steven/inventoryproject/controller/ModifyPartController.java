@@ -17,44 +17,101 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * The controller class that provides logic for the modify part screen of the application.
+ *
+ * @author Steven Nguyen
+ */
 public class ModifyPartController implements Initializable {
+    /**
+     * The part object that will be modified.
+     */
+    Part modifyPart = MainController.getPartToModify();
+
+    /**
+     * The machine ID/company name label for the part.
+     */
     @FXML
     private Label partIdNameLabel;
-    @FXML
-    private RadioButton inHouseRadioButton;
-    @FXML
-    private ToggleGroup tgPartType;
-    @FXML
-    private RadioButton outsourcedRadioButton;
-    @FXML
-    private TextField partIdText;
-    @FXML
-    private TextField partNameText;
-    @FXML
-    private TextField partInventoryText;
-    @FXML
-    private TextField partPriceText;
-    @FXML
-    private TextField partMaxText;
+    /**
+     * The machine ID/company name text-field for the part.
+     */
     @FXML
     private TextField partIdNameText;
+    /**
+     * The part ID text-field for the part.
+     */
+    @FXML
+    private TextField partIdText;
+    /**
+     * The radio button for an outsource part.
+     */
+    @FXML
+    private RadioButton outsourcedRadioButton;
+    /**
+     * The radio button for an in-house part.
+     */
+    @FXML
+    private RadioButton inHouseRadioButton;
+    /**
+     * The name text-field for the part.
+     */
+    @FXML
+    private TextField partNameText;
+    /**
+     * The stock text-field for the part.
+     */
+    @FXML
+    private TextField partInventoryText;
+    /**
+     * The price text-field for the part.
+     */
+    @FXML
+    private TextField partPriceText;
+    /**
+     * The maximum inventory level text-field for the part.
+     */
+    @FXML
+    private TextField partMaxText;
+    /**
+     * The minimum inventory level text-field for the part.
+     */
     @FXML
     private TextField partMinText;
 
+    /**
+     * Sets the label to machine ID when the in-house radio button is selected.
+     *
+     * @param event In-house radio button action
+     */
     @FXML
     void inHouseRadioButtonAction(ActionEvent event) {
         partIdNameLabel.setText("Machine ID");
     }
 
+    /**
+     * Sets the label to company name when the in-house radio button is selected.
+     *
+     * @param event Outsourced radio button action
+     */
     @FXML
     void outsourcedRadioButtonAction(ActionEvent event) {
         partIdNameLabel.setText("Company Name");
     }
 
+    /**
+     * Modifies a Part object depending on either In-house or Outsourced selection and adds it to the Inventory.
+     *
+     * @param event Save button action
+     * @throws IOException from FXMLoader
+     *
+     *
+     * LOGICAL ERROR: Previously, I was trying to cast the In-house part object to be Outsourced upon save.
+     * To fix it, I instead created a new In-house/Outsourced Part object and deleted the previous one.
+     */
     @FXML
     void saveButtonAction(ActionEvent event) throws IOException {
         try {
-            Part modifyPart = MainController.getPartToModify();
 
             int id = modifyPart.getId();
             String name = partNameText.getText();
@@ -88,15 +145,8 @@ public class ModifyPartController implements Initializable {
             if (inHouseRadioButton.isSelected()) {
                 try {
                     machineId = Integer.parseInt(partIdNameText.getText());
-
-                    InHouse modifyInHousePart = (InHouse) modifyPart;
-                    modifyInHousePart.setName(name);
-                    modifyInHousePart.setMax(max);
-                    modifyInHousePart.setPrice(price);
-                    modifyInHousePart.setMin(min);
-                    modifyInHousePart.setStock(stock);
-                    modifyInHousePart.setMachineId(machineId);
-
+                    InHouse modifyInHousePart = new InHouse(id, name, price, stock, min, max, machineId);
+                    Inventory.addPart(modifyInHousePart);
                     partAddSuccessful = true;
                 } catch (NumberFormatException e) {
                     displayAlert(5);
@@ -106,19 +156,13 @@ public class ModifyPartController implements Initializable {
 
             if (outsourcedRadioButton.isSelected()) {
                 companyName = partIdNameText.getText();
-
-                Outsourced modifyOutsourcedPart = (Outsourced) modifyPart;
-                modifyOutsourcedPart.setName(name);
-                modifyOutsourcedPart.setMax(max);
-                modifyOutsourcedPart.setPrice(price);
-                modifyOutsourcedPart.setMin(min);
-                modifyOutsourcedPart.setStock(stock);
-                modifyOutsourcedPart.setCompanyName(companyName);
-
+                Outsourced modifyOutsourcedPart = new Outsourced(id, name, price, stock, min, max, companyName);
+                Inventory.addPart(modifyOutsourcedPart);
                 partAddSuccessful = true;
             }
 
             if (partAddSuccessful) {
+                Inventory.deletePart(modifyPart);
                 returnToMainScreen(event);
             }
         } catch (NumberFormatException e) {
@@ -126,6 +170,12 @@ public class ModifyPartController implements Initializable {
         }
     }
 
+    /**
+     * Cancels modification of Part object.
+     *
+     * @param event Cancel button action
+     * @throws IOException from FXML Loader
+     */
     @FXML
     void cancelButtonAction(ActionEvent event) throws IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -138,6 +188,12 @@ public class ModifyPartController implements Initializable {
         }
     }
 
+    /**
+     * Loads the MainView screen to return to the Main Screen.
+     *
+     * @param event Main screen action
+     * @throws IOException from FXML Loader
+     */
     private void returnToMainScreen(ActionEvent event) throws IOException {
         Pane myPane = FXMLLoader.load(getClass().getResource
                 ("/MainView.fxml"));
@@ -147,6 +203,11 @@ public class ModifyPartController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Displays an alert depending on the error condition
+     *
+     * @param alertType Alert message condition
+     */
     private void displayAlert(int alertType) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
 
@@ -185,10 +246,15 @@ public class ModifyPartController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Initializes the controller and populates the text-fields with previously saved Part object information.
+     * Label changes depending on if the part was an In-house or Outsourced part.
+     *
+     * @param location The location used to resolve relative path for the root object.
+     * @param resources The resources used to localize the root object.
+     */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        Part modifyPart = MainController.getPartToModify();
-
+    public void initialize(URL location, ResourceBundle resources) {
         if (modifyPart instanceof InHouse) {
             inHouseRadioButton.setSelected(true);
             partIdNameLabel.setText("Machine ID");

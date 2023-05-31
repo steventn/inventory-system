@@ -20,41 +20,97 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+/**
+ * The controller class that provides logic for the main screen of the application.
+ *
+ * @author Steven Nguyen
+ */
 public class MainController implements Initializable {
+    /**
+     * The selected part to be modified.
+     */
     private static Part modifyPart;
+    /**
+     * The selected product be modified.
+     */
     private static Product modifyProduct;
 
+    /**
+     * The all parts table view.
+     */
     @FXML
     private TableView<Part> allPartsTable;
+    /**
+     * The part ID column of the all products table.
+     */
     @FXML
     private TableColumn<Part, Integer> partId;
+    /**
+     * The part name column of the all products table.
+     */
     @FXML
     private TableColumn<Part, String> partName;
+    /**
+     * The part stock column of the all products table.
+     */
     @FXML
     private TableColumn<Part, Integer> partInventory;
+    /**
+     * The part price column of the all products table.
+     */
     @FXML
     private TableColumn<Part, Double> partPrice;
+    /**
+     * The search field for a part in the inventory.
+     */
     @FXML
     private TextField searchPartsField;
+    /**
+     * The all products table view.
+     */
     @FXML
     private TableView<Product> allProductsTable;
+    /**
+     * The product ID column of the all products table.
+     */
     @FXML
     private TableColumn productId;
+    /**
+     * The product name column of the all products table.
+     */
     @FXML
     private TableColumn productName;
+    /**
+     * The product stock column of the all products table.
+     */
     @FXML
     private TableColumn productInventory;
+    /**
+     * The product price column of the all products table.
+     */
     @FXML
     private TableColumn productPrice;
+    /**
+     * The search field for a product in the inventory.
+     */
     @FXML
     private TextField searchProductsField;
-    @FXML
-    private ObservableList<Part> partsList = FXCollections.observableArrayList();
 
+    /**
+     * Retrieves the part to be modified .
+     *
+     * @return modifyPart Part object
+     */
     public static Part getPartToModify() {
         return modifyPart;
     }
 
+    /**
+     * Displays the add part scene.
+     *
+     * @param event Add part button action
+     * @throws IOException from FXMLoader
+     */
     @FXML
     void addPartsAction(ActionEvent event) throws IOException {
         Pane addParts = FXMLLoader.load(getClass().getResource("/AddPartView.fxml"));
@@ -64,6 +120,12 @@ public class MainController implements Initializable {
         window.show();
     }
 
+    /**
+     * Displays the modify part scene.
+     *
+     * @param event Modify part button action
+     * @throws IOException from FXMLoader
+     */
     @FXML
     void modifyPartsAction(ActionEvent event) throws IOException {
         modifyPart = allPartsTable.getSelectionModel().getSelectedItem();
@@ -79,6 +141,12 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Deletes a part from the all part table.
+     *
+     * @param event Delete part button action
+     * @throws IOException from FXMLoader
+     */
     @FXML
     void deletePartsAction(ActionEvent event) throws IOException {
         Part selectedPart = allPartsTable.getSelectionModel().getSelectedItem();
@@ -97,6 +165,12 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Searches for a part using either part ID or by name.
+     *
+     * @param event Search part action
+     * @throws IOException from FXMLoader
+     */
     @FXML
     void searchParts(ActionEvent event) throws IOException {
         ObservableList<Part> partsFound = FXCollections.observableArrayList();
@@ -125,10 +199,21 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Retrieves the product to be modified .
+     *
+     * @return modifyProduct Product object
+     */
     public static Product getProductToModify() {
         return modifyProduct;
     }
 
+    /**
+     * Displays the add product scene.
+     *
+     * @param event Add product button action
+     * @throws IOException from FXMLoader
+     */
     @FXML
     void addProductsAction(ActionEvent event) throws IOException {
         Pane addParts = FXMLLoader.load(getClass().getResource("/AddProductView.fxml"));
@@ -138,6 +223,12 @@ public class MainController implements Initializable {
         window.show();
     }
 
+    /**
+     * Displays the modify product screen.
+     *
+     * @param event Modify product button action
+     * @throws IOException from FXMLoader
+     */
     @FXML
     void modifyProductsAction(ActionEvent event) throws IOException {
         modifyProduct = allProductsTable.getSelectionModel().getSelectedItem();
@@ -153,6 +244,12 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Deletes a product from the all products table.
+     *
+     * @param event Delete product button action
+     * @throws IOException from FXMLoader
+     */
     @FXML
     void deleteProductsAction(ActionEvent event) throws IOException {
         Product selectedProduct = allProductsTable.getSelectionModel().getSelectedItem();
@@ -171,6 +268,12 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Searches for a product using either product ID or by name.
+     *
+     * @param event Search product action
+     * @throws IOException from FXMLoader
+     */
     @FXML
     void searchProducts(ActionEvent event) throws IOException {
         ObservableList<Product> productsFound = FXCollections.observableArrayList();
@@ -198,6 +301,11 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Closes the application upon selecting Exit.
+     *
+     * @param event Exit button action
+     */
     @FXML
     void exitMainScreen(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?");
@@ -207,10 +315,17 @@ public class MainController implements Initializable {
         }
     }
 
+    /**
+     * Displays an alert depending on the error condition
+     *
+     * @param alertType Alert message condition
+     *
+     *
+     * FUTURE ENHANCEMENT: An optional String parameter could be passed in to use String.format() so less case scenarios
+     * can be used and allow reusable code for the other Controller classes.
+     */
     private void displayAlert(int alertType) {
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        Alert alertError = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
 
         switch (alertType) {
             case 1:
@@ -224,26 +339,32 @@ public class MainController implements Initializable {
                 alert.setContentText("Product not found");
                 break;
             case 3:
-                alertError.setTitle("Error");
-                alertError.setHeaderText("Error: Part is empty.");
-                alertError.setContentText("Part not selected");
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: Part is empty.");
+                alert.setContentText("Part not selected");
                 break;
             case 4:
-                alertError.setTitle("Error");
-                alertError.setHeaderText("Error: Product is empty.");
-                alertError.setContentText("Product not selected");
+                alert.setTitle("Error");
+                alert.setHeaderText("Error: Product is empty.");
+                alert.setContentText("Product not selected");
                 break;
             case 5:
-                alertError.setTitle("Error");
-                alertError.setHeaderText("Parts Associated");
-                alertError.setContentText("All parts must be removed from product before deletion.");
+                alert.setTitle("Error");
+                alert.setHeaderText("Parts Associated");
+                alert.setContentText("All parts must be removed from product before deletion.");
                 break;
         }
         alert.showAndWait();
     }
 
+    /**
+     * Initializes the controller and adds existing parts/product to be displayed on the all parts/product table.
+     *
+     * @param location The location used to resolve relative path for the root object.
+     * @param resources The resources used to localize the root object.
+     */
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL location, ResourceBundle resources) {
         allPartsTable.setItems(Inventory.getAllParts());
         partId.setCellValueFactory(new PropertyValueFactory<>("id"));
         partName.setCellValueFactory(new PropertyValueFactory<>("name"));
